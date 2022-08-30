@@ -13,7 +13,7 @@ namespace BusinessObject.Interfaces
         public Task<PetitionResponse> GetAllUsers();
         public Task<PetitionResponse> GetByUserId(int userId);
         public Task<PetitionResponse> AddUser(User user);
-        public Task<PetitionResponse> UpdateUser(User user);
+        public Task<PetitionResponse> UpdateUser(User user, int id);
         public Task<PetitionResponse> DeleteUser(int userId);
     }
 }

@@ -54,5 +54,38 @@ namespace Rules.BusinessObject
                 return false;
             }
         }
+
+        public async Task<bool> UpdtUser(User user, int id)
+        {
+            try
+            {
+                if (user.UserId == id || !CheckName(user.Name))
+                {
+                    _db.Users.Update(user);
+                    if (await _db.SaveChangesAsync() <= 0)
+                    {
+                        message = "No fue posible actualizar el usuario";
+                        return true;
+                    }
+                    message = "Usuario actualizado con exito";
+                    return true;
+                }
+                else
+                {
+                    message = "El id del usuario no coincide o el nombre ya está registrado";
+                    return false;
+                }
+            }
+            catch(Exception ex)
+            {
+                message = $"Un error ocurrió al actualizar el usuario. {ex.Message}";
+                return false;
+            }
+        }
+
+        private bool CheckName(string name)
+        {
+            return _db.Users.Any(x => x.Name == name);
+        }
     }
 }

@@ -57,9 +57,18 @@ namespace BusinessObject.Services
             throw new NotImplementedException();
         }
 
-        public Task<PetitionResponse> UpdateUser(User user)
+        public async Task<PetitionResponse> UpdateUser(User user, int id)
         {
-            throw new NotImplementedException();
+            BOUser objUser = new BOUser(_db);
+            var result = await objUser.UpdtUser(user, id);
+
+            return new PetitionResponse
+            {
+                Success = result,
+                URL = "api/User/UpdtUser",
+                Message = objUser.message,
+                Result = objUser.result
+            };
         }
     }
 }

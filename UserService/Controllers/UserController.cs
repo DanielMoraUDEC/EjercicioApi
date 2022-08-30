@@ -20,9 +20,13 @@ namespace UserService.Controllers
         public async Task<PetitionResponse> GetUsers() => 
             await _iUser.GetAllUsers();
 
-        [HttpPut("AddUser")]
+        [HttpPost("AddUser")]
         public async Task<PetitionResponse> AddUser(User user) =>
             await _iUser.AddUser(user);
+
+        [HttpPatch("UpdtUser")]
+        public async Task<PetitionResponse> UpdtUser(User user) =>
+            await _iUser.UpdateUser(user, user.UserId);
 
     }
 }
