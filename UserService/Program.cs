@@ -2,7 +2,19 @@ using BusinessObject.Interfaces;
 using DataAccess.ApplicationDbContext;
 using Microsoft.EntityFrameworkCore;
 
+var _myCors = "myCors";
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: _myCors,
+                      policy =>
+                      {
+                          policy.AllowAnyHeader()
+                          .AllowAnyHeader()
+                          .AllowAnyOrigin();
+                      });
+});
 
 // Add services to the container.
 
@@ -18,6 +30,7 @@ ConfigurationManager configuration = builder.Configuration;
 builder.Services.AddDbContext<ApplicationDbContext>(Options => Options.UseSqlite(
     configuration.GetConnectionString("DefaultConnection")));
 
+
 //Inyección de dependencias
 builder.Services.AddScoped<IUser, BusinessObject.Services.UserService>();
 
@@ -30,6 +43,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors(_myCors);
 
 app.UseHttpsRedirection();
 
