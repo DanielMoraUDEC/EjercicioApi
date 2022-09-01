@@ -34,9 +34,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(Options => Options.UseSqlite
 //Inyección de dependencias
 builder.Services.AddScoped<IUser, BusinessObject.Services.UserService>();
 
-//Cors
-builder.Services.AddCors(options => options.AddPolicy("AllowWebApp", builder => builder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod()));
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -46,8 +43,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseCors(_myCors);
-
-app.UseCors("AllowWebApp");
 
 app.UseHttpsRedirection();
 
