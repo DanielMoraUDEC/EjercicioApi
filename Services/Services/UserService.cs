@@ -52,9 +52,33 @@ namespace BusinessObject.Services
             };
         }
 
-        public Task<PetitionResponse> GetByUserId(int userId)
+        public async Task<PetitionResponse> GetByUserId(int userId)
         {
-            throw new NotImplementedException();
+            BOUser objeto = new BOUser(_db);
+            var result = await objeto.GeyUserById(userId);
+
+            return new PetitionResponse
+            {
+                Success = result,
+                URL = "api/User/TraerUsuario",
+                Message = objeto.message,
+                Result = objeto.result
+            };
+        }
+
+        public async Task<PetitionResponse> getUsuarioID(int UserId)
+        {
+            BOUser objeto = new BOUser(_db);
+            var result = await objeto.GeyUserById(UserId);
+
+            return new PetitionResponse
+            {
+                Success = result,
+                URL = "api/User/TraerUsuario",
+                Message = objeto.message,
+                Result = objeto.result
+            };
+            
         }
 
         public async Task<PetitionResponse> UpdateUser(User user, int id)

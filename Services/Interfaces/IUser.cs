@@ -15,5 +15,6 @@ namespace BusinessObject.Interfaces
         public Task<PetitionResponse> AddUser(User user);
         public Task<PetitionResponse> UpdateUser(User user, int id);
         public Task<PetitionResponse> DeleteUser(int userId);
+        public Task<PetitionResponse> getUsuarioID(int UserId);
     }
 }

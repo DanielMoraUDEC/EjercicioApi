@@ -17,7 +17,7 @@ namespace UserService.Controllers
         }
 
         [HttpGet("GetUsers")]
-        public async Task<PetitionResponse> GetUsers() => 
+        public async Task<PetitionResponse> GetUsers() =>
             await _iUser.GetAllUsers();
 
         [HttpPost("AddUser")]
@@ -28,5 +28,8 @@ namespace UserService.Controllers
         public async Task<PetitionResponse> UpdtUser(User user) =>
             await _iUser.UpdateUser(user, user.UserId);
 
+        [HttpGet("TraerUsuario/{UserID}")]
+        public async Task<PetitionResponse> GetByUserId(int UserID) =>
+            await _iUser.getUsuarioID(UserID);
     }
 }

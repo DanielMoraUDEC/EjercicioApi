@@ -87,5 +87,26 @@ namespace Rules.BusinessObject
         {
             return _db.Users.Any(x => x.Name == name);
         }
+
+        public async Task<bool> GeyUserById(int UserID){
+
+            try{
+                if (_db.Users.Any(x => x.UserId == UserID))
+                {
+                    result = _db.Users.FirstOrDefault(x => x.UserId == UserID);
+                    return true;
+                }
+                else
+                {
+                    message = $"Usuario no encontrado";
+                    return false;
+                }
+            }
+            catch(Exception ex){
+                message = $"Un error ocurrio al buscar el usuario. {ex.Message}";
+                return false;
+                //comentario que no sirve
+            }
+        }
     }
 }
